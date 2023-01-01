@@ -34,72 +34,76 @@
 
     <!-- Actual page content! -->
     <div class="container">
-        <div class="section" id="stuffList">
-            <h1>Stuff inventory:</h1>
+        <div class="section flow-text" id="stuffDetail">
+            <h1>Stuff details:</h1>
+            <a class="btn-small waves-effect waves-light" href="clothing.html">
+                <i class="material-icons left">arrow_back</i>Return to Inventory
+            </a>
             <table>
-                <thead>
+                <tr>
+                    <th>Item:</th>
+                    <td>Widgets</td>
+                </tr>
+                <tr>
+                    <th>Quantity:</th>
+                    <td>5</td>
 
-                    <tr>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                        <th></th>
-                    </tr>
-
-                </thead>
-                <tbody>
-
-                    <tr>
-                        <td>Widgets</td>
-                        <td>5</td>
-                        <td>
-                            <a class="btn-small waves-effect waves-light" href="item.html">
-                                <i class="material-icons right">edit</i>
-                                Info/Edit
-                            </a>
-                            <a class="btn-small waves-effect waves-light red">
-                                <i class="material-icons right">delete</i>
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Gizmos</td>
-                        <td>99</td>
-                        <td>
-                            <a class="btn-small waves-effect waves-light" href="item.html">
-                                <i class="material-icons right">edit</i>
-                                Info/Edit
-                            </a>
-                            <a class="btn-small waves-effect waves-light red">
-                                <i class="material-icons right">delete</i>
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-
-                </tbody>
+                </tr>
+                <tr>
+                    <th>Description:</th>
+                    <td>
+                        Widgets are cool!
+                        You can do ... so many...
+                        different things... with them...
+                    </td>
+                </tr>
             </table>
         </div>
 
-        <div class="section" id="stuffAdd">
-            <h2>Add stuff:</h2>
-            <form>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <label for="nameInput">Item Name:</label>
-                        <input type="text" name="name" id="nameInput" class="validate" data-length="32" required>
+        <div class="section" id="stuffControls">
+            <a class="btn-large waves-effect waves-light orange left modal-trigger" href="#stuffEdit">
+                <i class="material-icons right">edit</i>
+                Edit
+            </a>
+            <a class="btn-large waves-effect waves-light red right">
+                <i class="material-icons right">delete</i>
+                Delete
+            </a>
+        </div>
+
+
+        <div class="modal" id="stuffEdit">
+
+            <div class="modal-content">
+
+                <h2>Edit item:</h2>
+                <form>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label for="nameInput">Item Name:</label>
+                            <input type="text" name="name" id="nameInput" class="validate" data-length="32" required>
+                        </div>
+                        <div class="input-field col s6">
+                            <label for="quantityInput">Item Quantity:</label>
+                            <input type="number" name="quantity" id="quantityInput" value=1 required>
+                        </div>
                     </div>
-                    <div class="input-field col s6">
-                        <label for="quantityInput">Item Quantity:</label>
-                        <input type="number" name="quantity" id="quantityInput" value=1 required>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <label for="descriptionInput">Item Description:</label>
+                            <input type="text" name="description" id="descriptionInput" data-length="100">
+                        </div>
                     </div>
-                </div>
-                <button class="btn waves-effect waves-light" type="submit">
-                    <i class="material-icons right">send</i>
-                    Submit
-                </button>
-            </form>
+                    <div class="modal-footer">
+                        <button class="btn waves-effect waves-light " type="submit">
+                            <i class="material-icons right">send</i>
+                            Submit
+                        </button>
+                        <button class="modal-close waves-effect waves-green btn-flat">Never Mind</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 
