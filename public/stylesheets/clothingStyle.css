@@ -1,0 +1,46 @@
+form, table {
+    border: solid 2px rgb(0, 0, 0);
+    border-style:dotted;
+    background-color: #f3e5f5;
+}
+
+h1, h2 {
+    border-radius: 25px;
+    font-family: 'Fredoka One', cursive;
+    color:#311b92;
+}
+
+.btn-small, button, span {
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+form:focus-within {
+    border-color: orange;
+}
+
+thead {
+    font-size: larger;
+}
+
+tr {
+    font-weight:bold;
+    font-family: 'Raleway', sans-serif;
+}
+
+.actualitem:hover {
+    background-color: #e1bee7;
+}
+
+.section {
+    font-weight:700;
+    font-family: 'Raleway', sans-serif;
+}
+
+html {
+    background: url("/images/inventorypagebackground.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}
