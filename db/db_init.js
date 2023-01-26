@@ -32,7 +32,9 @@ db.execute(insert_clothing_table_sql, ['Jeans', 'Black, ripped, wide-leg', 'Zara
 
 db.execute(insert_clothing_table_sql, ['Sleeveless shirt/tank top', 'White, long', 'Target', '2', null]);
 
-db.execute(insert_clothing_table_sql, ['T-shirt', 'Thingymabob', 'ThingyStore', '100', 'Not to be confused with a Thingamabob']);
+db.execute(insert_clothing_table_sql, ['T-shirt', 'Purple, cropped', 'Target', '1', 'Really soft... fitted... Made in USA']);
+
+db.execute(insert_clothing_table_sql, ['Sweater', 'Blue', 'Hollister', '5', 'Comfy... Purchased on: August 1st, 2022']);
 
 /**** Read the sample items inserted ****/
 
