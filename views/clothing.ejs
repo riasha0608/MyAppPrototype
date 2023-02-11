@@ -40,103 +40,77 @@
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr class="actualitem">
-                        <td>Jeans</td>
-                        <td>Black, ripped, wide-leg</td>
-                        <td>Zara</td>
-                        <td>1</td>
+                    <% for (let i = 0; i < inventory.length; i++) {%>
+                    <tr>
+                        <td><%= inventory[i].category %></td>
+                        <td><%= inventory[i].colorDescription %></td>
+                        <td><%= inventory[i].placeBought %></td>
+                        <td><%= inventory[i].quantity %></td>
                         <td>
-                            <img src="/images/rippedblackjeans.jpg" alt="blackjeans">
+                            <img src="/images/<%=inventory[i].id%>.jpg" alt="blackjeans">
                         </td>
-                        <td></td>
                         <td>
-                            <a class="btn-small waves-effect waves-light cyan" href="/inventory/details">
-                                <i class="material-icons right">edit</i>
-                                Info/Edit
-                            </a>
-                            <a class="btn-small waves-effect waves-light indigo">
-                                <i class="material-icons right">delete</i>
-                                Delete
-                            </a>
+                            <a class="btn-small waves-effect waves-light cyan" href="/clothing/details/<%= inventory[i].id %>">
+                                <i class="material-icons right">edit</i>Info/Edit</a>
+                            <a class="btn-small waves-effect waves-light indigo" href="/clothing/details/<%=inventory[i].id %>/delete"><i
+                                class="material-icons right">delete</i>Delete</a>
                         </td>
-                    </tr>
-
-                    <tr class="actualitem">
-                        <td>Sleeveless shirt/tank top</td>
-                        <td>White, long</td>
-                        <td>Target</td>
-                        <td>2</td>
-                        <td>
-                            <img src="/images/longwhitetank.jpg" alt="whitelongtank">
-                        </td>
-                        <td></td>
-                        <td>
-                            <a class="btn-small waves-effect waves-light cyan" href="/inventory/details">
-                                <i class="material-icons right">edit</i>
-                                Info/Edit
-                            </a>
-                            <a class="btn-small waves-effect waves-light indigo">
-                                <i class="material-icons right">delete</i>
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-
+                    </tr>                
+                    <% } %>
                 </tbody>
             </table>
         </div>
 
         <div class="section" id="stuffAdd">
             <h1>Add items:</h1>
-            <form>
+            <form method="post" action="/clothing">
                 <div class="row">
                     <div class="input-field col s6">
-                        <select>
+                        <select id="categories" name="categories">
                           <option value="" disabled selected>Choose your category</option>
-                          <option value="1">T-shirt</option>
-                          <option value="2">Sweater</option>
-                          <option value="3">Formal shirt</option>
-                          <option value="4">Long sleeve shirt</option>
-                          <option value="5">Sleeveless shirt/tank top</option>
-                          <option value="6">Hoodie</option>
-                          <option value="7">Shorts</option>
-                          <option value="8">Skirt</option>
-                          <option value="9">Jeans</option>
-                          <option value="10">Sweatpants</option>
-                          <option value="11">Coat</option>
-                          <option value="12">Suit</option>
-                          <option value="13">Tie</option>
-                          <option value="14">Dress</option>
-                          <option value="15">Bra</option>
-                          <option value="16">Underwear</option>
-                          <option value="17">Swimsuit</option>
-                          <option value="18">Pajamas</option>
-                          <option value="19">Gym sets</option>
-                          <option value="20">Scarf</option>
-                          <option value="21">Hat/Cap</option>
-                          <option value="22">Gloves</option>
-                          <option value="23">Socks</option>
-                          <option value="24">Flip Flops/Slippers</option>
-                          <option value="25">Shoes</option>
-                          <option value="26">Athletic Shoes</option>
-                          <option value="27">Boots</option>
-                          <option value="28">Dress shoes</option>
-                          <option value="29">Sandals/high heels</option>
+                          <option value="T-shirt">T-shirt</option>
+                          <option value="Sweater">Sweater</option>
+                          <option value="Formal shirt">Formal shirt</option>
+                          <option value="Long sleeve shirt">Long sleeve shirt</option>
+                          <option value="Sleeveless shirt/tank top">Sleeveless shirt/tank top</option>
+                          <option value="Hoodie">Hoodie</option>
+                          <option value="Shorts">Shorts</option>
+                          <option value="Skirt">Skirt</option>
+                          <option value="Jeans">Jeans</option>
+                          <option value="Sweatpants">Sweatpants</option>
+                          <option value="Coat">Coat</option>
+                          <option value="Suit">Suit</option>
+                          <option value="Tie">Tie</option>
+                          <option value="Dress">Dress</option>
+                          <option value="Bra">Bra</option>
+                          <option value="Underwear">Underwear</option>
+                          <option value="Swimsuit">Swimsuit</option>
+                          <option value="Pajamas">Pajamas</option>
+                          <option value="Gym sets">Gym sets</option>
+                          <option value="Scarf">Scarf</option>
+                          <option value="Hat/Cap">Hat/Cap</option>
+                          <option value="Gloves">Gloves</option>
+                          <option value="Socks">Socks</option>
+                          <option value="Flip Flops/Slippers">Flip Flops/Slippers</option>
+                          <option value="Shoes">Shoes</option>
+                          <option value="Athletic Shoes">Athletic Shoes</option>
+                          <option value="Boots">Boots</option>
+                          <option value="Dress shoes">Dress shoes</option>
+                          <option value="Sandals/high heels">Sandals/high heels</option>
                         </select>
                         <label>Clothing item category</label>
                     </div>
                     <div class="input-field col s6">
                         <label for="nameInput">Clothing item color and description:</label>
-                        <input type="text" name="name" id="nameInput" class="validate" data-length="32" required>
+                        <input type="text" name="colorDescrip" id="colorDescrip" class="validate" data-length="32" required>
                     </div>
                     <div class="input-field col s6">
                         <label for="nameInput">Place clothing item was bought: </label>
-                        <input type="text" name="name" id="nameInput" class="validate" data-length="32" required>
+                        <input type="text" name="place" id="place" class="validate" data-length="32" required>
                     </div>
                     <div class="quantity input-field col s6">
                         <label for="quantityInput">Clothing item quantity:</label>
-                        <input type="number" name="quantity" id="quantityInput" value=1 required>
+                        <input type="number" name="quantity" id="quantity" value=1 required>
                     </div>
                     <div class="input-field col s12">
                         <form action="#">
