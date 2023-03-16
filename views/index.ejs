@@ -21,6 +21,38 @@
 
 <body>
 
+    <!-- Nav bar -->
+    <header>
+        <nav>
+            <div class="nav-wrapper purple">
+                <a href="/" class="brand-logo">Closet Manager</a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <!-- Main nav, hidden for small screens -->
+                <ul id="desktop-nav" class="right hide-on-med-and-down">
+                    <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+                    <li><a href="/clothing"><i class="material-icons left">event_note</i>Closet Inventory</a></li>
+                    <% if (isLoggedIn) { %>
+                        <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
+                        <li><a href="/logout" class="btn red">Logout</a></li>                        
+                    <% } else { %>
+                        <li><a href="/login" class="btn blue">Login</a></li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+        <!-- Mobile nav menu, shown when menu button clicked -->
+        <ul id="mobile-nav" class="sidenav">
+            <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
+            <li><a href="/clothing"><i class="material-icons left">event_note</i>Inventory</a></li>
+            <% if (isLoggedIn) { %>
+                <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
+                <li><a href="/logout" class="btn red">Logout</a></li>                        
+            <% } else { %>
+                <li><a href="/login" class="btn blue">Login</a></li>
+            <% } %>
+        </ul>
+    </header>
+
     <!-- Actual page content! -->
     <div class="container center">
         <h1 class="light-blue accent-1">Welcome!</h1>
@@ -32,6 +64,12 @@
             <i class="material-icons right">sentiment_very_satisfied</i>
         </a>       
     </div>
+
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- initialize Materialize elements -->
+    <script src="/scripts/materializeAutoInit.js"></script>
 
 </body>
 

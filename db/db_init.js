@@ -15,6 +15,7 @@ const create_clothing_table_sql = `
         placeBought VARCHAR (150) NOT NULL,
         quantity INT NOT NULL,
         description VARCHAR(150) NULL,
+        userid VARCHAR(50) NULL,
         PRIMARY KEY (id)
     );
 `
