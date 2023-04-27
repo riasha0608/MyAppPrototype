@@ -32,6 +32,7 @@
                 <ul id="desktop-nav" class="right hide-on-med-and-down">
                     <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
                     <li><a href="/clothing"><i class="material-icons left">event_note</i>Closet Inventory</a></li>
+                    <li><a href="/categories"><i class="material-icons left">dataset</i> Clothing Categories</a></li>
                     <% if (isLoggedIn) { %>
                         <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
                         <li><a href="/logout" class="btn red">Logout</a></li>                        
@@ -45,6 +46,7 @@
         <ul id="mobile-nav" class="sidenav">
             <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
             <li><a href="/clothing"><i class="material-icons left">event_note</i>Inventory</a></li>
+            <li><a href="/categories"><i class="material-icons left">dataset</i> Clothing Categories</a></li>
             <% if (isLoggedIn) { %>
                 <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
                 <li><a href="/logout" class="btn red">Logout</a></li>                        
@@ -73,20 +75,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% for (let i = 0; i < inventory.length; i++) {%>
+                    <% for (let i = 0; i < clothinglist.length; i++) {%>
                     <tr>
-                        <td><%= inventory[i].category %></td>
-                        <td><%= inventory[i].colorDescription %></td>
-                        <td><%= inventory[i].placeBought %></td>
-                        <td><%= inventory[i].quantity %></td>
+                        <td><%= clothinglist[i].categoriesName %></td>
+                        <td><%= clothinglist[i].colorDescription %></td>
+                        <td><%= clothinglist[i].placeBought %></td>
+                        <td><%= clothinglist[i].quantity %></td>
                         <td>
-                            <img src="/images/<%=inventory[i].id%>.jpg" alt="blackjeans">
+                            <img src="/images/1.jpg" alt="blackjeans">
                         </td>
                         <td>
-                            <a class="btn-small waves-effect waves-light cyan" href="/clothing/details/<%= inventory[i].id %>">
-                                <i class="material-icons right">edit</i>Info/Edit</a>
-                            <a class="btn-small waves-effect waves-light indigo" href="/clothing/details/<%=inventory[i].id %>/delete"><i
-                                class="material-icons right">delete</i>Delete</a>
+                            <a class="btn-small waves-effect waves-light cyan" href="/clothing/details/<%= clothinglist[i].id %>">
+                                <i class="material-icons right">edit</i>
+                                Info/Edit
+                            </a>
+                            <a class="btn-small waves-effect waves-light indigo" href="/clothing/details/<%=clothinglist[i].id %>/delete"><i
+                                class="material-icons right">delete</i>
+                                Delete
+                            </a>
                         </td>
                     </tr>                
                     <% } %>
@@ -96,10 +102,71 @@
 
         <div class="section" id="stuffAdd">
             <h1>Add items:</h1>
-            <form method="post" action="/clothing">
+            <form id = "addForm" method="post" action="/clothing">
                 <div class="row">
                     <div class="input-field col s6">
-                        <select id="categories" name="categories">
+                        <select id="categoryInput" name="category" required>
+                            <option value="" disabled selected>Choose your clothing category</option>
+                            <% for (let i = 0; i < categorieslist.length; i++) { %>
+                                <option value=<%=categorieslist[i].categoriesID %>><%= categorieslist[i].categoriesName %></option>
+                            <% } %>
+                        </select>
+                        <label for="categoryInput">Clothing category:</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <label for="nameInput">Clothing item color and description:</label>
+                        <input type="text" name="colorDescription" id="colorDescription" class="validate" data-length="32" required>
+                    </div>
+                <div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <label for="nameInput">Place clothing item was bought: </label>
+                        <input type="text" name="placeBought" id="placeBought" class="validate" data-length="32" required>
+                    </div>
+                    <div class="quantity input-field col s6">
+                        <label for="quantityInput">Clothing item quantity:</label>
+                        <input type="number" name="quantity" id="quantity" value=1 required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <form action="#">
+                            <div class="file-field input-field">
+                                <span class="btn btn-file indigo">
+                                    <i class="material-icons left">cloud_upload</i>
+                                    Upload image of clothing item<input type="file">
+                                </span>
+                              <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                              </div>
+                            </div>
+                        </form>
+                    </div> 
+                <div>
+                <div class="input-field col s8">
+                        <button class="btn waves-effect waves-light cyan" type="submit">
+                            <i class="material-icons right">send</i>
+                            Submit
+                        </button>
+                </div> 
+            </form>
+        </div>
+    </div>
+
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- initialize Materialize elements -->
+    <script src="/scripts/materializeAutoInit.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+<!-- <select id="categories" name="categories">
                           <option value="" disabled selected>Choose your category</option>
                           <option value="T-shirt">T-shirt</option>
                           <option value="Sweater">Sweater</option>
@@ -131,50 +198,4 @@
                           <option value="Dress shoes">Dress shoes</option>
                           <option value="Sandals/high heels">Sandals/high heels</option>
                         </select>
-                        <label>Clothing item category</label>
-                    </div>
-                    <div class="input-field col s6">
-                        <label for="nameInput">Clothing item color and description:</label>
-                        <input type="text" name="colorDescrip" id="colorDescrip" class="validate" data-length="32" required>
-                    </div>
-                    <div class="input-field col s6">
-                        <label for="nameInput">Place clothing item was bought: </label>
-                        <input type="text" name="place" id="place" class="validate" data-length="32" required>
-                    </div>
-                    <div class="quantity input-field col s6">
-                        <label for="quantityInput">Clothing item quantity:</label>
-                        <input type="number" name="quantity" id="quantity" value=1 required>
-                    </div>
-                    <div class="input-field col s12">
-                        <form action="#">
-                            <div class="file-field input-field">
-                                <span class="btn btn-file indigo">
-                                    <i class="material-icons left">cloud_upload</i>
-                                    Upload image of clothing item<input type="file">
-                                </span>
-                              <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text">
-                              </div>
-                            </div>
-                        </form>
-                    </div> 
-                    <div class="input-field col s8">
-                        <button class="btn waves-effect waves-light cyan" type="submit">
-                            <i class="material-icons right">send</i>
-                            Submit
-                        </button>
-                    </div> 
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Materialize JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <!-- initialize Materialize elements -->
-    <script src="/scripts/materializeAutoInit.js"></script>
-
-</body>
-
-</html>
+                        <label>Clothing item category</label> -->

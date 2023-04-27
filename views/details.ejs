@@ -32,6 +32,7 @@
                 <ul id="desktop-nav" class="right hide-on-med-and-down">
                     <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
                     <li><a href="/clothing"><i class="material-icons left">event_note</i>Closet Inventory</a></li>
+                    <li><a href="/categories"><i class="material-icons left">dataset</i> Clothing Categories</a></li>
                     <% if (isLoggedIn) { %>
                         <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
                         <li><a href="/logout" class="btn red">Logout</a></li>                        
@@ -45,6 +46,7 @@
         <ul id="mobile-nav" class="sidenav">
             <li><a href="/"><i class="material-icons left">home</i>Home</a></li>
             <li><a href="/clothing"><i class="material-icons left">event_note</i>Inventory</a></li>
+            <li><a href="/categories"><i class="material-icons left">dataset</i> Clothing Categories</a></li>
             <% if (isLoggedIn) { %>
                 <li><a href="/profile"><i class="material-icons left">person</i> Hello, <%=user.name%></a> </li>
                 <li><a href="/logout" class="btn red">Logout</a></li>                        
@@ -64,30 +66,30 @@
             <table>
                 <tr>
                     <th>Category:</th>
-                    <td><%= category %></td>
+                    <td><%= clothing.categoriesName %></td>
                 </tr>
                 <tr>
                     <th>Color and Description:</th>
-                    <td><%= colorDescription %></td>
+                    <td><%= clothing.colorDescription %></td>
 
                 </tr>
                 <tr>
                     <th>Place bought:</th>
-                    <td><%= placeBought %></td>
+                    <td><%= clothing.placeBought %></td>
                 </tr>
                 <tr>
                     <th>Quantity:</th>
-                    <td><%= quantity %></td>
+                    <td><%= clothing.quantity %></td>
                 </tr>
                 <tr>
                     <th>Image:</th>
                     <td>
-                        <img src="/images/<%=id%>.jpg" alt="blackjeans">
+                        <img src="/images/1.jpg" alt="blackjeans">
                     </td>
                 </tr>
                 <tr>
                     <th>Description:</th>
-                    <td><%= description %></td>
+                    <td><%= clothing.description %></td>
                 </tr>
             </table>
         </div>
@@ -97,7 +99,7 @@
                 <i class="material-icons right">edit</i>
                 Edit
             </a>
-            <a class="btn-large waves-effect waves-light indigo right" href="/clothing/details/<%= id %>/delete">
+            <a class="btn-large waves-effect waves-light indigo right" href="/clothing/details/<%= clothing.id %>/delete">
                 <i class="material-icons right">delete</i>
                 Delete
             </a>
@@ -109,19 +111,29 @@
             <div class="modal-content">
 
                 <h2>Edit clothing item:</h2>
-                <form method="post" action="/clothing/details/<%= id%>">
+                <form id="updateForm" method="post" action="/clothing/details/<%= clothing.id%>">
                     <div class="row">
                         <div class="input-field col s6">
+                            <select type="number" id="categoryInput" name="category" required>
+                                <option value="" disabled> Choose your clothing category </option>
+                                <% for (let i = 0; i < categorieslist.length; i++) { %>
+                                    <option value=<%=categorieslist[i].categoriesID %> 
+                                        <% if (clothing.categoriesID == categorieslist[i].categoriesID) { %> selected <% } %> ><%= categorieslist[i].categoriesName %></option>
+                                <% } %>
+                              </select>
+                              <label for="categoryInput">Categories:</label>
+                        </div>
+                        <div class="input-field col s6">
                             <label for="nameInput">Clothing item color and description:</label>
-                            <input type="text" name="colorDescrip" id="colorDescrip" class="validate" data-length="32" value = "<%= colorDescription%>" required>
+                            <input type="text" name="colorDescription" id="colorDescription" class="validate" data-length="32" value = "<%= clothing.colorDescription%>">
                         </div>
                         <div class="input-field col s6">
                             <label for="nameInput">Place clothing item was bought: </label>
-                            <input type="text" name="place" id="place" class="validate" data-length="32" value = "<%= placeBought%>" required>
+                            <input type="text" name="placeBought" id="placeBought" class="validate" data-length="32" value = "<%= clothing.placeBought%>">
                         </div>
                         <div class="quantity input-field col s6">
                             <label for="quantityInput">Clothing item quantity:</label>
-                            <input type="number" name="quantity" id="quantity" value=<%= quantity%> required>
+                            <input type="number" name="quantity" id="quantity" value=<%= clothing.quantity%>>
                         </div>
                         <div class="input-field col s12">
                             <div class="file-field input-field">
@@ -136,23 +148,21 @@
                         </div>
                         <div class="input-field col s12">
                             <label for="descriptionInput">Description:</label>
-                            <input type="text" name="description" id="description" data-length="100" value="<%= description%>">
+                            <input type="text" name="description" id="description" data-length="100" value="<%= clothing.description%>">
                         </div>
                     </div>
-                    
-                    <div class="modal-footer purple lighten-5">
-                        <button class="btn waves-effect waves-light cyan" type="submit">
-                            <i class="material-icons right">send</i>
-                            Submit
-                        </button>
-                        <button class="modal-close waves-effect waves-green btn-flat deep-purple white-text" type="cancel">
-                            <i class="material-icons right">sentiment_neutral</i>
-                            Never Mind
-                        </button>
-                    </div>
                 </form>
+                <div class="modal-footer purple lighten-5">
+                    <button class="btn waves-effect waves-light cyan" type="submit" form="updateForm">
+                        <i class="material-icons right">send</i>
+                        Submit
+                    </button>
+                    <button class="modal-close waves-effect waves-green btn-flat deep-purple white-text" type="cancel">
+                        <i class="material-icons right">sentiment_neutral</i>
+                        Never Mind
+                    </button>
+                </div>
             </div>
-
         </div>
     </div>
 
